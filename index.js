@@ -3,9 +3,22 @@ import { spawn } from 'child_process';
 import { existsSync, rmSync, statSync } from 'fs';
 import { join } from 'path';
 
+const packageName = 'vutron';
+
 async function run() {
-  const packageName = 'vutron';
-  const cwd = process.cwd();
+  const clone = async () => new Promise((resolve, reject) => {
+    try {
+      spawn('git', ['clone', `https://github.com/jooy2/${packageName}`, packageName, '--depth', '1'], { stdio: 'inherit' })
+        .on('error', (err) => {
+          reject(err);
+        })
+        .on('exit', (code) => {
+          resolve(code);
+        });
+    } catch (e) {
+      reject(e);
+    }
+  });
 
   try {
     if (existsSync(packageName) && statSync(packageName).isDirectory()) {
@@ -14,16 +27,9 @@ async function run() {
       return;
     }
 
-    spawn('git', ['clone', 'https://github.com/jooy2/vutron', packageName, '--depth', '1'], { stdio: 'inherit' }).on(
-      'close',
-      (code) => {
-        if (code) {
-          console.log(code);
-          console.log(join(cwd, packageName, '.git'));
-          rmSync(join(cwd, packageName, '.git'), { recursive: true, force: true });
-        }
-      },
-    );
+    await clone();
+
+    rmSync(join(process.cwd(), packageName, '.git'), { recursive: true, force: true });
   } catch (e) {
     console.error(e?.message);
     process.exit(1);
