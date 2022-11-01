@@ -29,7 +29,9 @@ async function run() {
 
     await clone();
 
+    // Remove .git, docs directory
     rmSync(join(process.cwd(), packageName, '.git'), { recursive: true, force: true });
+    rmSync(join(process.cwd(), packageName, 'docs'), { recursive: true, force: true });
   } catch (e) {
     console.error(e?.message);
     process.exit(1);

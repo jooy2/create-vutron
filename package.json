@@ -1,7 +1,7 @@
 {
   "name": "create-vutron",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Quick Start Templates for Vite + Vue 3 + Electron",
   "main": "index.js",
   "author": "Jooy2 <jootc.help@gmail.com>",
