@@ -1,30 +1,47 @@
 {
-  "name": "create-vutron",
-  "type": "module",
-  "version": "1.0.1",
-  "description": "Quick Start Templates for Vite + Vue 3 + Electron",
-  "main": "index.js",
-  "author": "Jooy2 <jootc.help@gmail.com>",
-  "license": "MIT",
-  "bin": {
-    "create-vutron": "index.js"
-  },
-  "scripts": {
-    "test": "node index.js"
-  },
-  "keywords": [
-    "vue",
-    "vue3",
-    "template",
-    "skeleton",
-    "electron",
-    "vite",
-    "pinia",
-    "vuetify"
-  ],
-  "devDependencies": {
-    "eslint": "^8.24.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0"
-  }
+	"name": "create-vutron",
+	"type": "module",
+	"version": "1.1.0",
+	"description": "Quick Start Templates for Vite + Vue 3 + Electron",
+	"author": "Jooy2 <jooy2.contact@gmail.com>",
+	"license": "MIT",
+	"homepage": "https://github.com/jooy2/vutron",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jooy2/vutron"
+	},
+	"main": "dist/index.js",
+	"bin": "dist/index.js",
+	"exports": {
+		".": "./dist/index.js"
+	},
+	"scripts": {
+		"test": "npm run build && node dist/index.js",
+		"build": "npm run format:fix && tsc && npm run minify",
+		"minify": "terser dist/index.js --config-file .terserrc -o dist/index.js",
+		"format": "prettier .",
+		"format:fix": "prettier . --write"
+	},
+	"keywords": [
+		"vue",
+		"vue3",
+		"template",
+		"skeleton",
+		"electron",
+		"vite",
+		"pinia",
+		"vuetify"
+	],
+	"devDependencies": {
+		"@types/node": "^18.11.10",
+		"@typescript-eslint/eslint-plugin": "^5.45.0",
+		"@typescript-eslint/parser": "^5.45.0",
+		"eslint": "^8.24.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-import": "^2.26.0",
+		"prettier": "^2.8.0",
+		"terser": "^5.16.1",
+		"typescript": "^4.9.3"
+	}
 }
