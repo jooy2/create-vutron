@@ -7,7 +7,7 @@ const PKG_NAME = 'vutron';
 const PKG_AUTHOR = 'jooy2';
 
 async function run(): Promise<void> {
-	const clone = async (): Promise<number> =>
+	const clone = async (): Promise<number | null> =>
 		new Promise((resolve, reject) => {
 			try {
 				spawn(
@@ -26,7 +26,7 @@ async function run(): Promise<void> {
 			}
 		});
 
-	const installModules = async (): Promise<number> =>
+	const installModules = async (): Promise<number | null> =>
 		new Promise((resolve, reject) => {
 			try {
 				const npmCommand = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
@@ -58,7 +58,9 @@ async function run(): Promise<void> {
 
 		await installModules();
 	} catch (e) {
-		console.error(e?.message);
+		if (e instanceof Error) {
+			console.error(e?.message);
+		}
 		process.exit(1);
 	}
 }

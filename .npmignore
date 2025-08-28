@@ -10,9 +10,8 @@ node_modules/
 lib/
 
 .git/
-.terserrc
-.eslintignore
-.eslintrc.json
+terser.config.json
+eslint.config.ts
 .editorconfig
 .prettierrc
 .prettierignore
